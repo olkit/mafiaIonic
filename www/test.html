@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="testSockJs">
+<head>
+  <meta charset="utf-8">
+  <title>Test SockJs</title>
+</head>
+<body>
+<input type="button" value="Send" onclick="sendMessage()"/>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js">
+</script>
+<script>
+  var ws = new SockJS("http://localhost:8080/test");
+  ws.onmessage = function(data){  console.log(data);  }
+  ws.onopen = function() {
+    console.log('open');
+  };
+
+  // On connection close
+  ws.onclose = function() {
+    console.log('close');
+  };
+  function sendMessage(){
+    // Get the content from the textbox
+    var message = 'test';
+    var username = 'test';
+
+    // The object to send
+    var send = {
+      message: message,
+      username: username
+    };
+
+    // Send it now
+    ws.send(JSON.stringify(send));
+  }
+</script>
+</body>
+</html>

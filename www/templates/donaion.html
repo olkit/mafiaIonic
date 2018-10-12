@@ -1,0 +1,18 @@
+<ion-view view-title="Вход" hide-nav-bar="true">
+  <ion-content class="padding">
+    <div class="list" ng-init="credentials = {}">
+      <img class="full-image" src="images/logo.png">
+      <label class="item item-input">
+        <span class="input-label">Username</span>
+        <input type="text" ng-model="credentials.login">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Password</span>
+        <input type="password" ng-model="credentials.password">
+      </label>
+    </div>
+    <button class="button button-full button-gradient" ng-click="login(credentials)">
+      Войти
+    </button>
+  </ion-content>
+</ion-view>

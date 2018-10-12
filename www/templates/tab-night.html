@@ -1,0 +1,99 @@
+<ion-view view-title="Ночь">
+  <ion-content class="padding">
+
+    <div class="item range">
+      <i class="icon ion-volume-low"></i>
+      <input type="range" name="volume" min="0" max="100" ng-model="volume" ng-change="setVolume(volume)">
+      <i class="icon ion-volume-high"></i>
+    </div>
+    <div class="row">
+      <div class="col col-25">
+        <button class="button button-full button-light" ng-click="backwardAudio()">
+          <i class="icon ion-skip-backward">
+          </i>
+        </button>
+      </div>
+      <div class="col col-50" ng-show="playing">
+        <button class="button button-full button-stable" ng-click="pauseAudio()">
+          <i class="icon ion-pause">
+          </i>
+        </button>
+      </div>
+      <div class="col col-50" ng-hide="playing">
+        <button class="button button-full button-royal" ng-click="playAudio()">
+          <i class="icon ion-play">
+          </i>
+        </button>
+      </div>
+      <div class="col col-25">
+        <button class="button button-full button-light" ng-click="forwardAudio()">
+          <i class="icon ion-skip-forward">
+          </i>
+        </button>
+      </div>
+    </div>
+    <!--<div class="item range">
+      <input type="range" name="duration" min="0" max="100" ng-model="duration" ng-change="setDuration(duration)">
+    </div>-->
+
+
+    <div class="card">
+      <div class="row">
+        <div class="col col-25" style="text-align:center">
+          <h1 ng-style="{'background-color':progressval == 0 ?  'red': 'white'}">{{ progressval | number:0}}</h1>
+        </div>
+        <div class="col col-75">
+          <progress id="progressbar" max="60" value="{{ progressval }}"></progress>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-25" ng-repeat="time in [10, 20, 30, 60]">
+          <button class="button button-large button-stable" ng-click="setTimer(time)"><h2>{{time}}</h2></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Отстрел
+      </div>
+      <div class="row">
+        <div class="button-bar">
+          <a class="button" ng-repeat="number in [1,2,3,4,5]" ng-click="kill(number)"
+             ng-disabled="false">{{number}}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="button-bar">
+          <a class="button" ng-repeat="number in [6,7,8,9,10]" ng-click="kill(number)"
+             ng-disabled="false">{{number}}</a>
+        </div>
+      </div>
+      <div class="item item-divider">
+        Ночью мафия отсрелила Игрока {{lastKilledGamer.slot}}: {{lastKilledGamer.name}}.
+      </div>
+    </div>
+
+    <div class="card" ng-hide="firstKilled === null">
+      <div class="item item-divider">
+        Лучший Ход
+      </div>
+      <div class="row">
+        <div class="button-bar">
+          <a class="button" ng-repeat="number in [1,2,3,4,5]" ng-click="addBestMove(number)"
+             ng-disabled="false">{{number}}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="button-bar">
+          <a class="button" ng-repeat="number in [6,7,8,9,10]" ng-click="addBestMove(number)"
+             ng-disabled="false">{{number}}</a>
+        </div>
+      </div>
+      <div class="item item-divider">
+        Лучший Ход: <span ng-repeat="slot in bestMove">{{slot}} </span>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

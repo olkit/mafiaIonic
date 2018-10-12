@@ -1,0 +1,58 @@
+<ion-view view-title="Список клубов" hide-nav-bar="true">
+  <ion-content class="padding">
+    <div class="card">
+      {{lastMessage.message}}
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Онлайн
+      </div>
+      <div class="item item-text-wrap">
+        <h2>
+          {{lastMessage}}
+        </h2>
+      </div>
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <input type="text" placeholder="Сообщение" ng-model="inputMessage">
+        </label>
+        <button class="button button-small" ng-click="sendMessage({message: inputMessage})">
+          Отправить
+        </button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        В городе {{state}}
+      </div>
+      <div class="row">
+        <ion-list class="col col-50">
+          <ion-item class="item-remove-animate item-button-right"
+                    ng-repeat="(slot, gamer) in gamers track by gamer.slot"
+                    ng-if="gamer.slot <= 5" type="item-text-wrap">
+
+            <h2>{{slot}}. {{gamer.name}} {{gamer.roleID}}</h2>
+            <button class="button button-large button-assertive">
+              <span ng-show="gamer.penalty < 3">{{gamer.penalty}}</span>
+              <span ng-show="gamer.penalty == 4">3</span>
+              <span ng-show="gamer.penalty == 3">3🔇</span>
+            </button>
+          </ion-item>
+        </ion-list>
+        <ion-list class="col col-50">
+          <ion-item class="item-remove-animate item-button-right"
+                    ng-repeat="(slot, gamer) in gamers track by gamer.slot"
+                    ng-if="gamer.slot >= 6" type="item-text-wrap">
+
+            <h2>{{slot}}. {{gamer.name}} {{gamer.roleID}}</h2>
+            <button class="button button-large button-assertive">
+              <span ng-show="gamer.penalty < 3">{{gamer.penalty}}</span>
+              <span ng-show="gamer.penalty == 4">3</span>
+              <span ng-show="gamer.penalty == 3">3🔇</span>
+            </button>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

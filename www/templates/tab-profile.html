@@ -1,0 +1,136 @@
+<ion-view view-title="Профиль">
+  <ion-content class="padding">
+    <ion-refresher on-refresh="updateProfile()"></ion-refresher>
+    <div class="card">
+      <div class="item item-avatar">
+        <img src="img/adam.jpg">
+        <h2>{{auth.nick}}</h2>
+        <p>Клуб (г.{{auth.city}})</p>
+      </div>
+      <div class="item item-text-wrap">
+        <canvas id="profile" class="chart chart-radar"
+                chart-data="profile.data" chart-options="profile.options" chart-labels="profile.labels">
+        </canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Статистика
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">Сыграно игр</div>
+        <div class="col col-20 col-center">{{stats.gameCount}}</div>
+        <div class="col col-20 col-center">{{stats.winCount}}/{{stats.loseCount}}</div>
+        <div class="col col-20 col-center">{{100 * stats.winCount / stats.gameCount | number: 0}}%</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">За Мирного</div>
+        <div class="col col-20 col-center">{{stats.civilCount}}</div>
+        <div class="col col-20 col-center">{{stats.winCivilCount}}/{{stats.loseCivilCount}}</div>
+        <div class="col col-20 col-center">{{100 * stats.winCivilCount / stats.civilCount | number: 0}}%</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">За Шерифа</div>
+        <div class="col col-20 col-center">{{stats.sherifCount}}</div>
+        <div class="col col-20 col-center">{{stats.winSherifCount}}/{{stats.loseSherifCount}}</div>
+        <div class="col col-20 col-center">{{100 * stats.winSherifCount / stats.sherifCount | number: 0}}%</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">За Мафию</div>
+        <div class="col col-20 col-center">{{stats.mafiaCount}}</div>
+        <div class="col col-20 col-center">{{stats.winMafiaCount}}/{{stats.loseMafiaCount}}</div>
+        <div class="col col-20 col-center">{{100 * stats.winMafiaCount / stats.mafiaCount | number: 0}}%</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">За Дона</div>
+        <div class="col col-20 col-center">{{stats.donCount}}</div>
+        <div class="col col-20 col-center">{{stats.winDonCount}}/{{stats.loseDonCount}}</div>
+        <div class="col col-20 col-center">{{100 * stats.winDonCount / stats.donCount | number: 0}}%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Друзья (Все игры)
+      </div>
+      <div class="row" ng-repeat="friends in statsFriends.gameCount">
+        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Друзья (Разноцвет)
+      </div>
+      <div class="row" ng-repeat="friends in statsFriends.oppositeCount">
+        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Друзья (Разноцавет Я-Мирный)
+      </div>
+      <div class="row" ng-repeat="friends in statsFriends.oppositeCivilCount">
+        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Друзья (Разноцавет Я-Мафия)
+      </div>
+      <div class="row" ng-repeat="friends in statsFriends.oppositeMafiaCount">
+        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Друзья (Одноцвет)
+      </div>
+      <div class="row" ng-repeat="friends in statsFriends.sameCount">
+        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Друзья (Одноцвет Мы-Мирные)
+      </div>
+      <div class="row" ng-repeat="friends in statsFriends.sameCivilCount">
+        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Друзья (Одноцвет Мы-Мафия)
+      </div>
+      <div class="row" ng-repeat="friends in statsFriends.sameMafiaCount">
+        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
+        <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

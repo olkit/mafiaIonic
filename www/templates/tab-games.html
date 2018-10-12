@@ -1,0 +1,62 @@
+<ion-view view-title="Игры">
+  <ion-content class="padding">
+<!--
+    <label class="item item-input">
+      <input type="text" ng-model="myNick">
+    </label>-->
+    <button class="button button-full button-positive" ng-click="updateFromServer(myNick)">
+      Обновить
+    </button>
+    <div class="list card" ng-repeat="game in gameList track by $index">
+      <div ng-class="(game.roleWin === 'MAFIA') ? 'item item-avatar item-dark' : 'item item-avatar item-assertive'">
+        <img ng-src="{{(game.isMyGame) ? (game.userinfo.win ? 'images/up.svg': 'images/down.svg') : 'images/mafIcon.png'}}">
+        <h2>
+          Победа {{game.roleWin === 'MAFIA' ? 'Мафии' : 'Мирных Жителей'}}
+          <span ng-show="'MAFIA'===game.roleWin">
+            ({{game.description}}-{{game.description}})
+          </span>
+        </h2>
+        <p>{{game.createdTimestamp * 1000 | date : "dd.MM.yyyy hh:mm"}}, Длительность: {{game.duration / 60 | number:0}}мин</p>
+      </div>
+
+      <div class="item item-body">
+        <div class="row">
+          <div class="col col-50">
+            <span ng-class="game.gamers[0].role + ((game.userinfo.slot === 1) ? ' bold' : ' ')">1. {{game.gamers[0].name}} ({{game.gamers[0].status}})</span><br/>
+            <span ng-class="game.gamers[1].role + ((game.userinfo.slot === 2) ? ' bold' : ' ')">2. {{game.gamers[1].name}} ({{game.gamers[1].status}})</span><br/>
+            <span ng-class="game.gamers[2].role + ((game.userinfo.slot === 3) ? ' bold' : ' ')">3. {{game.gamers[2].name}} ({{game.gamers[2].status}})</span><br/>
+            <span ng-class="game.gamers[3].role + ((game.userinfo.slot === 4) ? ' bold' : ' ')">4. {{game.gamers[3].name}} ({{game.gamers[3].status}})</span><br/>
+            <span ng-class="game.gamers[4].role + ((game.userinfo.slot === 5) ? ' bold' : ' ')">5. {{game.gamers[4].name}} ({{game.gamers[4].status}})</span>
+          </div>
+          <div class="col col-50">
+            <span ng-class="game.gamers[5].role + ((game.userinfo.slot === 6) ? ' bold' : ' ')">6.  {{game.gamers[5].name}} ({{game.gamers[5].status}})</span><br/>
+            <span ng-class="game.gamers[6].role + ((game.userinfo.slot === 7) ? ' bold' : ' ')">7.  {{game.gamers[6].name}} ({{game.gamers[6].status}})</span><br/>
+            <span ng-class="game.gamers[7].role + ((game.userinfo.slot === 8) ? ' bold' : ' ')">8.  {{game.gamers[7].name}} ({{game.gamers[7].status}})</span><br/>
+            <span ng-class="game.gamers[8].role + ((game.userinfo.slot === 9) ? ' bold' : ' ')">9.  {{game.gamers[8].name}} ({{game.gamers[8].status}})</span><br/>
+            <span ng-class="game.gamers[9].role + ((game.userinfo.slot === 10) ? ' bold' : ' ')">10. {{game.gamers[9].name}} ({{game.gamers[9].status}})</span>
+          </div>
+        </div>
+        <p>
+
+        <span ng-show="game.roleWin === 'MAFIA'">
+          Игра {{game.description}} - {{game.description}}<br/>
+        </span>
+          <span ng-show="game.roleWin === 'CIVIL'">
+          Мирных осталось {{game.description}} игроков.<br/>
+        </span>
+          <span ng-hide="game.firstKilled === 0">
+            Лучший ход игрока #{{game.firstKilled}}:
+            <span ng-repeat="bestMove in game.bestMove">{{bestMove}} </span> (+{{game.bestPoints}}). <br/>
+          </span>
+          {{game.comment}}
+        </p>
+        <p>
+          <a class="subdued">0 Нравится</a>
+          <a class="subdued">0 Комментарий</a>
+          <a class="subdued" ng-show="game.gameID === undefined" ng-click="sendOldGameServer(game)">Отправить на Сервер</a>
+          <a class="subdued" ng-show="game.gameID === undefined" ng-click="deleteGameServer(game)">Удалить</a>
+        </p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

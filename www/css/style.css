@@ -1,0 +1,25 @@
+/* Empty. Add your own CSS if you like */
+.bold {
+  font-weight: bold;
+}
+
+.MAFIA {
+  color: #555555;
+}
+
+.CIVIL {
+  color: #ff3b30
+}
+
+.DON {
+  color: #000000
+}
+
+.SHERIF {
+  color: #ffc900;
+}
+
+.button-gradient {
+  color: white;
+  background: linear-gradient(to right, red, black);
+}

@@ -1,0 +1,109 @@
+<ion-view view-title="Суд">
+  <ion-content>
+    <div class="card">
+      <div class="row">
+        <div class="col col-50">
+          <button class="button button-small button-block  button-balanced" ng-click="startTimer(30)"
+                  ng-hide="timerStarted">
+            <i class="icon ion-ios-timer-outline"> 30</i>
+          </button>
+        </div>
+        <div class="col col-50">
+          <button class="button button-small button-block  button-balanced" ng-click="startTimer(60)"
+                  ng-hide="timerStarted">
+            <i class="icon ion-ios-timer-outline"> 60</i>
+          </button>
+        </div>
+      </div>
+      <div class="row" ng-show="timerStarted">
+        <div class="col col-25">
+          <h2 style="text-align:center;">{{ progressval | number:0}}</h2>
+        </div>
+        <div class="col col-50">
+          <progress id="progressbar" max="60" value="{{ progressval }}"></progress>
+        </div>
+        <div class="col col-25">
+          <button class="button button-small button-block  button-positive" ng-click="stopTimer()">
+            STOP
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <button class="button button-full button-energized" ng-show="kickBalance" ng-click="endBalance()">
+          Кто за чтоб игроки (<span ng-repeat="vb in voteBalance">{{vb.slot}} </span>) покинули стол?
+          [{{kickBalanceVote}}]:
+        </button>
+      </div>
+      <div class="row">
+        <div class="button-bar">
+          <a class="button" ng-repeat="number in [0,1,2,3,4,5]" ng-click="voteNumber(number)"
+             ng-disabled="number > (liveCount - voteCount)">{{number}}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="button-bar">
+          <a class="button" ng-repeat="number in [6,7,8,9,10]" ng-click="voteNumber(number)"
+             ng-disabled="number > (liveCount - voteCount)">{{number}}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" ng-hide="kickBalance">
+      <!--<div class="item item-text-wrap">-->
+      <!--{{activeVoteSlot}} Фол-->
+      <!--</div>-->
+      <div class="item item-text-wrap">
+        <button class="button button-light" ng-repeat="vote in voted "
+                ng-class="vote.slot === activeVoteSlot ? 'button button-balanced' : 'button button-light'"
+                ng-click="activeSlot(vote)">
+          {{vote.slot}}({{vote.count}})
+        </button>
+      </div>
+    </div>
+
+
+    <button class="button button-full button-balanced" ng-show="reVoting" ng-click="reVote()">
+      Переголосование игороков: <span ng-repeat="reSlot in voteBalance">{{reSlot.slot}}  </span>
+    </button>
+    <button class="button button-full button-balanced" ng-click="endCourt()" ng-hide="reVoting || kickBalance">
+      Завершить. <span ng-show="kickSlot > 0">Игрок {{kickSlot}} покидает стол.</span>
+    </button>
+
+    <button class="button button-full button-dark" ng-click="clearCourt()">
+      Голосования не будет!
+    </button>
+
+    <div class="card">
+      <div class="item item-divider">
+        Фолы игроков
+      </div>
+      <div class="row">
+        <ion-list class="col col-50">
+          <ion-item class="item-remove-animate item-button-right" ng-repeat="chat in gamers track by chat.slot"
+                    ng-if="chat.slot <= 5" type="item-text-wrap">
+
+            <h2>{{chat.lastText}} {{chat.name}}</h2>
+            <button class="button button-large button-assertive" ng-click="upPenalty(chat)">
+              <span ng-show="chat.penalty < 3">{{chat.penalty}}</span>
+              <span ng-show="chat.penalty == 4">3</span>
+              <span ng-show="chat.penalty == 3">3🔇</span>
+            </button>
+          </ion-item>
+        </ion-list>
+        <ion-list class="col col-50">
+          <ion-item class="item-remove-animate item-button-right" ng-repeat="chat in gamers track by chat.slot"
+                    ng-if="chat.slot >= 6" type="item-text-wrap">
+
+            <h2>{{chat.lastText}} {{chat.name}}</h2>
+            <button class="button button-large button-assertive" ng-click="upPenalty(chat)">
+              <span ng-show="chat.penalty < 3">{{chat.penalty}}</span>
+              <span ng-show="chat.penalty == 4">3</span>
+              <span ng-show="chat.penalty == 3">3🔇</span>
+            </button>
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

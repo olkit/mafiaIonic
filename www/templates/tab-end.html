@@ -1,0 +1,53 @@
+<ion-view view-title="Ночь">
+  <ion-content class="padding">
+
+    <h2 class="title"></h2>
+    <div class="button-bar">
+      <a ng-class="'MAFIA'===game.roleWin ? 'button button-dark': 'button button-dark-outline'"
+         ng-click="setRoleWin('MAFIA')">Мафия</a>
+      <a ng-class="'CIVIL'===game.roleWin ? 'button button-assertive': 'button button-assertive-outline'"
+         ng-click="setRoleWin('CIVIL')">Мирные</a>
+    </div>
+
+    <div class="list">
+      <div class="item item-icon-right" ng-repeat="gamers in game.gamers">
+        {{gamers.slot}}: {{gamers.name}}
+        <i class="icon">
+          <button class="button button-small button-assertive" ng-show="gamers.slot==game.firstKilled" disabled>
+            1
+          </button>
+          <button class="button button-small button-dark" ng-show="gamers.role=='DON'" disabled>
+            Д
+          </button>
+          <button class="button button-small button-dark" ng-show="gamers.role=='MAFIA'" disabled>
+            М
+          </button>
+          <button class="button button-small button-balanced" ng-show="gamers.role=='SHERIF'" disabled>
+            Ш
+          </button>
+          <button class="button button-large" disabled>
+            {{gamers.point | number: 2}}
+          </button>
+          <button class="button button-large button-balanced" ng-click="gamers.point = gamers.point + 0.1">
+            +0.1
+          </button>
+          <button class="button button-large button-dark" ng-click="gamers.point = gamers.point - 0.1">
+            -0.1
+          </button>
+        </i>
+      </div>
+      <label class="item item-input" >
+      <textarea ng-model="game.comment"
+                placeholder="Ваши комментарии о игре"></textarea>
+      </label>
+    </div>
+    <button class="button button-full button-positive" ng-click="sendServer()">
+      Отправить на Сервер
+    </button>
+    <ion-list>
+      <ion-item class="item-text-wrap" ng-repeat="log in game.gameLog track by $index">
+        {{log}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

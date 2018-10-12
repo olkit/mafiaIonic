@@ -1,0 +1,62 @@
+<ion-view view-title="День" >
+  <ion-content>
+    <div class="row">
+      <div class="col col-100">
+        <button class="button button-large button-block  button-balanced" ng-click="startTimer(60)" ng-hide="timerStarted">
+          START
+        </button>
+      </div>
+    </div>
+    <div class="row" ng-show="timerStarted">
+      <div class="col col-25">
+        <h1 style="text-align:center;">{{ progressval | number:0}}</h1>
+      </div>
+      <div class="col col-50">
+        <progress id="progressbar" max="60" value="{{ progressval }}"> </progress>
+      </div>
+      <div class="col col-25">
+        <button class="button button-block  button-positive" ng-click="stopTimer()">
+          STOP
+        </button>
+      </div>
+    </div>
+    <ion-list>
+      <ion-item class="item-remove-animate item-button-right item-icon-left" ng-repeat="chat in chats track by chat.slot" type="item-text-wrap" on-swipe-left="onSwipeRight(chat)">
+
+
+        <h2><div on-hold="kill(chat)">{{chat.lastText}} {{chat.name}}</div></h2>
+        <button class="button button-large button-assertive" ng-click="upPenalty(chat)">
+          <span ng-show="chat.penalty < 3">{{chat.penalty}}</span>
+          <span ng-show="chat.penalty == 4">3</span>
+          <span ng-show="chat.penalty == 3">3🔇</span>
+        </button>
+        <i class="icon ion-thumbsup dark" ng-click="voted(chat)" on-hold="kill(chat)" ng-hide="chat.status == 'participant'"></i>
+      </ion-item>
+    </ion-list>
+
+    <!--<ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" >
+        <img ng-src="{{chat.face}}" ng-click="voted(chat)">
+        <h2>{{chat.name}}</h2>
+        <p>{{chat.lastText}}</p>
+        <i class="icon">
+          <button class="button button-small button-assertive" ng-click="chat.penalty = chat.penalty + 1">
+            {{chat.penalty}}
+          </button>
+          <i class="ion-thumbsup royal" ng-click="voted(chat)" ng-hide="chat.status == 'participant'"></i>
+        </i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Удален
+        </ion-option-button>
+        <ion-option-button class="button-royal" ng-click="kill(chat)">
+          Застрелен
+        </ion-option-button>
+      </ion-item>
+    </ion-list>-->
+
+    <button class="button button-full button-dark" ng-click="gameOver()">
+      Обновить
+    </button>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,83 @@
+<ion-view view-title="Профиль" hide-nav-bar="true">
+  <ion-content class="padding">
+    <ion-refresher on-refresh="updateAll()"></ion-refresher>
+    <div class="card">
+      <div class="item item-divider">
+        Наибольшее количество побед
+      </div>
+      <div class="row" ng-repeat="stat in statWinrate">
+        <div class="col col-33 col-center">{{stat.nick}}</div>
+        <div class="col col-10 col-offset-25">{{stat.gameCount}}</div>
+        <div class="col col-15 col-center">{{stat.winCount}}/{{stat.loseCount}}</div>
+        <div class="col col-10 col-center">{{stat.winCount/stat.gameCount*100 | number:0}}%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Рейтинг
+      </div>
+      <div class="row" ng-repeat="stat in statRating">
+        <div class="col col-33 col-center">{{stat.nick}}</div>
+        <div class="col col-15 col-offset-33">{{stat.gameCount}}</div>
+        <div class="col col-15 col-center">{{stat.pointCount | number: 2}}</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Лучшые Доны
+      </div>
+      <div class="row" ng-repeat="stat in statWinrateDon">
+        <div class="col col-33 col-center">{{stat.nick}}</div>
+        <div class="col col-10 col-offset-25">{{stat.gameCount}}</div>
+        <div class="col col-15 col-center">{{stat.winCount}}/{{stat.loseCount}}</div>
+        <div class="col col-10 col-center">{{stat.winCount/stat.gameCount*100 | number:0}}%</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Лучшые Шерифы
+      </div>
+      <div class="row" ng-repeat="stat in statWinrateSherif">
+        <div class="col col-33 col-center">{{stat.nick}}</div>
+        <div class="col col-10 col-offset-25">{{stat.gameCount}}</div>
+        <div class="col col-15 col-center">{{stat.winCount}}/{{stat.loseCount}}</div>
+        <div class="col col-10 col-center">{{stat.winCount/stat.gameCount*100 | number:0}}%</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Лучшие Мафии
+      </div>
+      <div class="row" ng-repeat="stat in statWinrateMafia">
+        <div class="col col-33 col-center">{{stat.nick}}</div>
+        <div class="col col-10 col-offset-25">{{stat.gameCount}}</div>
+        <div class="col col-15 col-center">{{stat.winCount}}/{{stat.loseCount}}</div>
+        <div class="col col-10 col-center">{{stat.winCount/stat.gameCount*100 | number:0}}%</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Лучшые Мирные
+      </div>
+      <div class="row" ng-repeat="stat in statWinrateCivil">
+        <div class="col col-33 col-center">{{stat.nick}}</div>
+        <div class="col col-10 col-offset-25">{{stat.gameCount}}</div>
+        <div class="col col-15 col-center">{{stat.winCount}}/{{stat.loseCount}}</div>
+        <div class="col col-10 col-center">{{stat.winCount/stat.gameCount*100 | number:0}}%</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider">
+        Фол Мастер
+      </div>
+      <div class="row" ng-repeat="stat in statPenaly">
+        <div class="col col-33 col-center">{{stat.nick}}</div>
+        <div class="col col-10 col-offset-25">{{stat.gameCount}}</div>
+        <div class="col col-15 col-center">{{stat.penaltyAverage | number: 2}}</div>
+        <div class="col col-10 col-center">{{stat.penaltyCount | number: 0}}</div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

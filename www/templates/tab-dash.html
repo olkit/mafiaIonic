@@ -1,0 +1,78 @@
+<ion-view view-title="Ведущий">
+  <ion-content class="padding">
+
+    <div class="row">
+      <div class="col col-75">
+        <label class="item item-input">
+          <span class="input-label">Ведущий</span>
+          <input type="text">
+        </label>
+
+      </div>
+      <div class="col col-center"><label class="toggle">
+        <input type="checkbox">
+        <div class="track">
+          <div class="handle"></div>
+        </div>
+      </label>
+      </div>
+    </div>
+
+    <div class="list">
+      <div class="item item-icon-right" href="#" ng-repeat="gamer in gamers track by $index" ng-init="showRole = true"
+           on-swipe-left="showRole = !showRole;">
+        <input class="item item-input" type="text" placeholder="Игрок {{gamer.slot}}" ng-model="gamer.name">
+        <i class="icon">
+          <i ng-show="showRole" class="ion-eye-disabled" ng-click="showRole = false"></i>
+          <i ng-hide="showRole" class="ion-eye" ng-click="showRole = true"></i>
+          <button ng-show="showRole" ng-click="gamer.role = 'DON'; checkRoles(); showRole=false;"
+                  ng-disabled='!isDonAvailable'
+                  ng-class="gamer.role === 'DON' ? 'button button-small button-dark' : 'button button-outline button-small button-dark'">
+            Д
+          </button>
+          <button ng-show="showRole" ng-click="gamer.role = 'MAFIA'; checkRoles(); showRole=false;"
+                  ng-disabled='!isMafiaAvailable'
+                  ng-class="gamer.role === 'MAFIA' ? 'button button-small button-dark' : 'button button-outline button-small button-dark'">
+            М
+          </button>
+          <button ng-show="showRole" ng-click="gamer.role = 'SHERIF'; checkRoles(); showRole=false;"
+                  ng-disabled='!isSherifAvailable'
+                  ng-class="gamer.role === 'SHERIF' ? 'button button-small button-balanced' : 'button button-outline button-small button-balanced'">
+            Ш
+          </button>
+          <button ng-show="showRole" ng-click="gamer.role = 'CIVIL'; checkRoles(); showRole=false;"
+                  ng-class="gamer.role === 'CIVIL' ? 'button button-small button-assertive' : 'button button-outline button-small button-assertive'">
+            М
+          </button>
+        </i>
+        <!--<ion-reorder-button class="ion-navicon" on-reorder="reorderItem(gamer, $fromIndex, $toIndex)">-->
+        <!--</ion-reorder-button>-->
+      </div>
+    </div>
+    <button class="button button-full button-balanced" ng-click="newGame(gamers)" href="#/tab/chats">
+      Начать
+    </button>
+    <button class="button button-full button-balanced" ng-click="resetInit()">
+      Новая Игра (Очистить)
+    </button>
+    <button class="button button-full button-calm" ng-click="shuffleGamers(gamers)">
+      Перемешать игроков
+    </button>
+
+
+    <div class="card" >
+      <div class="item item-divider">
+        Быстрый ввод игроков
+      </div>
+      <div class="row" on-swipe-left="previousSlot()" on-tap="nextSlot()">
+        <div class="col col-20">
+          <span class="badge badge-light">{{gamers[activeUserElement].slot}}</span>
+        </div>
+        <div class="col col-80">
+            {{gamers[activeUserElement].name}}
+        </div>
+      </div>
+      <p ng-repeat="user in userList" ng-click="setUserToActiveSlot(user)" class="badge badge-stable">{{user.name}}</p>
+    </div>
+  </ion-content>
+</ion-view>
