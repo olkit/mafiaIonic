@@ -1,11 +1,11 @@
-<ion-view view-title="Ведущий">
+<ion-view view-title="Ведущий" hide-nav-bar="true">
   <ion-content class="padding">
 
     <div class="row">
       <div class="col col-75">
         <label class="item item-input">
           <span class="input-label">Ведущий</span>
-          <input type="text">
+          <input type="text" ng-value="auth.nick">
         </label>
 
       </div>
@@ -33,7 +33,7 @@
           <button ng-show="showRole" ng-click="gamer.role = 'MAFIA'; checkRoles(); showRole=false;"
                   ng-disabled='!isMafiaAvailable'
                   ng-class="gamer.role === 'MAFIA' ? 'button button-small button-dark' : 'button button-outline button-small button-dark'">
-            М
+            Ч
           </button>
           <button ng-show="showRole" ng-click="gamer.role = 'SHERIF'; checkRoles(); showRole=false;"
                   ng-disabled='!isSherifAvailable'
@@ -42,7 +42,7 @@
           </button>
           <button ng-show="showRole" ng-click="gamer.role = 'CIVIL'; checkRoles(); showRole=false;"
                   ng-class="gamer.role === 'CIVIL' ? 'button button-small button-assertive' : 'button button-outline button-small button-assertive'">
-            М
+            К
           </button>
         </i>
         <!--<ion-reorder-button class="ion-navicon" on-reorder="reorderItem(gamer, $fromIndex, $toIndex)">-->
@@ -53,10 +53,13 @@
       Начать
     </button>
     <button class="button button-full button-balanced" ng-click="resetInit()">
-      Новая Игра (Очистить)
+      Очистить
     </button>
     <button class="button button-full button-calm" ng-click="shuffleGamers(gamers)">
       Перемешать игроков
+    </button>
+    <button class="button button-full button-calm" >
+      АВТО Раздача ролей
     </button>
 
 

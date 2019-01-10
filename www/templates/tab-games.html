@@ -1,25 +1,36 @@
 <ion-view view-title="Игры">
   <ion-content class="padding">
-<!--
-    <label class="item item-input">
-      <input type="text" ng-model="myNick">
-    </label>-->
     <button class="button button-full button-positive" ng-click="updateFromServer(myNick)">
       Обновить
     </button>
+    <div class="button-bar" ng-show="gameList.length > 0">
+      <a ng-click="show = 'ALL'" class="button button-royal">Все</a>
+      <a ng-click="show = 'DON'" class="button button-dark">Дон</a>
+      <a ng-click="show = 'MAFIA'" class="button button-dark">Мафия</a>
+      <a ng-click="show = 'SHERIF'" class="button button-energized">Шериф</a>
+      <a ng-click="show = 'CIVIL'" class="button button-assertive">Мирный</a>
+    </div>
     <div class="list card" ng-repeat="game in gameList track by $index">
-      <div ng-class="(game.roleWin === 'MAFIA') ? 'item item-avatar item-dark' : 'item item-avatar item-assertive'">
+      <div ng-show="show == 'ALL' || show == game.userinfo.role" ng-class="'{{getClassCard(game.userinfo.role, game.userinfo.win)}}'"
+           ng-init="showMore = false" ng-click="showMore = !showMore">
         <img ng-src="{{(game.isMyGame) ? (game.userinfo.win ? 'images/up.svg': 'images/down.svg') : 'images/mafIcon.png'}}">
         <h2>
-          Победа {{game.roleWin === 'MAFIA' ? 'Мафии' : 'Мирных Жителей'}}
-          <span ng-show="'MAFIA'===game.roleWin">
+          {{game.userinfo.win ? 'Победа' : 'Поражение'}}
+          <span ng-show="'MAFIA'===game.roleWin" ng-if="game.description != '1'">
             ({{game.description}}-{{game.description}})
           </span>
+          <span ng-show="'MAFIA'===game.roleWin" ng-if="game.description == '1'">
+            (Угадайка)
+          </span>
+          <span ng-show="game.userinfo.slot===game.firstKilled">
+            (1 отсрел)
+          </span>
         </h2>
-        <p>{{game.createdTimestamp * 1000 | date : "dd.MM.yyyy hh:mm"}}, Длительность: {{game.duration / 60 | number:0}}мин</p>
+        <p>{{game.date * 1000 | date : "dd.MM.yyyy HH:mm"}}, Длительность: {{game.duration / 60 | number:0}}мин</p>
+        <span class="badge badge-dark">{{game.userinfo.point | number:2}}</span>
       </div>
 
-      <div class="item item-body">
+      <div class="item item-body" ng-show="showMore">
         <div class="row">
           <div class="col col-50">
             <span ng-class="game.gamers[0].role + ((game.userinfo.slot === 1) ? ' bold' : ' ')">1. {{game.gamers[0].name}} ({{game.gamers[0].status}})</span><br/>
@@ -36,8 +47,8 @@
             <span ng-class="game.gamers[9].role + ((game.userinfo.slot === 10) ? ' bold' : ' ')">10. {{game.gamers[9].name}} ({{game.gamers[9].status}})</span>
           </div>
         </div>
-        <p>
 
+        <p>
         <span ng-show="game.roleWin === 'MAFIA'">
           Игра {{game.description}} - {{game.description}}<br/>
         </span>
@@ -46,15 +57,23 @@
         </span>
           <span ng-hide="game.firstKilled === 0">
             Лучший ход игрока #{{game.firstKilled}}:
-            <span ng-repeat="bestMove in game.bestMove">{{bestMove}} </span> (+{{game.bestPoints}}). <br/>
+            <span ng-repeat="bestMove in game.bestMove track by $index">{{bestMove}} </span> (+{{game.bestPoints}}). <br/>
           </span>
           {{game.comment}}
         </p>
+
+        <p ng-if="showMore">
+          <iframe width="100%" height="100%"
+                  src="https://www.youtube.com/embed/tPTmy2_AKLg?controls=0">
+          </iframe>
+        </p>
+
         <p>
           <a class="subdued">0 Нравится</a>
           <a class="subdued">0 Комментарий</a>
           <a class="subdued" ng-show="game.gameID === undefined" ng-click="sendOldGameServer(game)">Отправить на Сервер</a>
           <a class="subdued" ng-show="game.gameID === undefined" ng-click="deleteGameServer(game)">Удалить</a>
+          <a class="subdued" ng-show="auth.userID = 'olki'" ng-click="deleteGameOnServer(game.gameID)">Удалить На Сервере</a>
         </p>
       </div>
     </div>

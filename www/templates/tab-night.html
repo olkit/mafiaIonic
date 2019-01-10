@@ -1,58 +1,11 @@
-<ion-view view-title="Ночь">
+<ion-view view-title="Ночь" hide-nav-bar="true">
   <ion-content class="padding">
-
-    <div class="item range">
-      <i class="icon ion-volume-low"></i>
-      <input type="range" name="volume" min="0" max="100" ng-model="volume" ng-change="setVolume(volume)">
-      <i class="icon ion-volume-high"></i>
-    </div>
-    <div class="row">
-      <div class="col col-25">
-        <button class="button button-full button-light" ng-click="backwardAudio()">
-          <i class="icon ion-skip-backward">
-          </i>
-        </button>
-      </div>
-      <div class="col col-50" ng-show="playing">
-        <button class="button button-full button-stable" ng-click="pauseAudio()">
-          <i class="icon ion-pause">
-          </i>
-        </button>
-      </div>
-      <div class="col col-50" ng-hide="playing">
-        <button class="button button-full button-royal" ng-click="playAudio()">
-          <i class="icon ion-play">
-          </i>
-        </button>
-      </div>
-      <div class="col col-25">
-        <button class="button button-full button-light" ng-click="forwardAudio()">
-          <i class="icon ion-skip-forward">
-          </i>
-        </button>
-      </div>
-    </div>
-    <!--<div class="item range">
-      <input type="range" name="duration" min="0" max="100" ng-model="duration" ng-change="setDuration(duration)">
-    </div>-->
+    <button class="button button-full button-dark" ng-click="missKill();">
+      НеСострел - Мафия промахнулась
+    </button>
 
 
-    <div class="card">
-      <div class="row">
-        <div class="col col-25" style="text-align:center">
-          <h1 ng-style="{'background-color':progressval == 0 ?  'red': 'white'}">{{ progressval | number:0}}</h1>
-        </div>
-        <div class="col col-75">
-          <progress id="progressbar" max="60" value="{{ progressval }}"></progress>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col col-25" ng-repeat="time in [10, 20, 30, 60]">
-          <button class="button button-large button-stable" ng-click="setTimer(time)"><h2>{{time}}</h2></button>
-        </div>
-      </div>
-    </div>
 
     <div class="card">
       <div class="item item-divider">
@@ -92,8 +45,186 @@
         </div>
       </div>
       <div class="item item-divider">
-        Лучший Ход: <span ng-repeat="slot in bestMove">{{slot}} </span>
+        Лучший Ход: <span ng-repeat="slot in bestMove track by $index">{{slot}} </span>
       </div>
     </div>
+
+
+
+
+    <div class="card">
+      <div class="item item-divider">
+        Таймер - Обратный отсчет
+      </div>
+      <div class="row">
+        <div class="col col-25" style="text-align:center">
+          <h1 ng-style="{'background-color':progressval == 0 ?  'red': 'white'}">{{ progressval | number:0}}</h1>
+        </div>
+        <div class="col col-75">
+          <progress id="progressbar" max="60" value="{{ progressval }}"></progress>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-25" ng-repeat="time in [10, 20, 30, 60]">
+          <button class="button button-large button-stable" ng-click="setTimer(time)"><h2>{{time}}</h2></button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col col-25">
+        <button class="button button-full button-light" ng-click="backwardAudio()">
+          <i class="icon ion-skip-backward">
+          </i>
+        </button>
+      </div>
+      <div class="col col-50" ng-show="playing">
+        <button class="button button-full button-stable" ng-click="pauseAudio()">
+          <i class="icon ion-pause">
+          </i>
+        </button>
+      </div>
+      <div class="col col-50" ng-hide="playing">
+        <button class="button button-full button-royal" ng-click="playAudio()">
+          <i class="icon ion-play">
+          </i>
+        </button>
+      </div>
+      <div class="col col-25">
+        <button class="button button-full button-light" ng-click="forwardAudio()">
+          <i class="icon ion-skip-forward">
+          </i>
+        </button>
+      </div>
+    </div>
+    <div class="item range">
+      <i class="icon ion-volume-low"></i>
+      <input type="range" name="volume" min="0" max="100" ng-model="volume" ng-change="setVolume(volume)">
+      <i class="icon ion-volume-high"></i>
+    </div>
+
+    <div class="list">
+      <!--https://tts.voicetech.yandex.net/generate?text=%D0%9D%D0%B0%D1%88%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%20%D0%B3%D0%BE%D1%82+%D0%BE%D0%B2&format=mp3&lang=ru-RU&speaker=zahar&emotion=good&key=af0ee4c4-3f72-4313-a46d-73a43baecf7a-->
+      <div class="item item-divider">
+        Озвучка
+      </div>
+
+      <a class="item" ng-click="playText('В городе ночь')">
+        В городе ночь
+      </a>
+
+      <a class="item"  ng-click="playText('Раздача карт')">
+        Раздача карт
+      </a>
+
+      <a class="item"  ng-click="playText('Просыпается Дон')">
+        Просыпается Дон
+      </a>
+      <a class="item" ng-click="playText('Просыпается мафия')">
+        Просыпается мафия
+      </a>
+      <a class="item" ng-click="playText('У мафии одна минута')">
+        У мафии одна минута
+      </a>
+      <a class="item" ng-click="playText('Мафия удаляется')">
+        Мафия удаляется
+      </a>
+
+      <a class="item" ng-click="playText('Шериф может проснуться и осмотреть город')">
+        Шериф может проснуться и осмотреть город
+      </a>
+      <a class="item" ng-click="playText('Шериф удаляется')">
+        Шериф удаляется
+      </a>
+
+      <a class="item" ng-click="playText('игрок № минута')">
+        игрок № минута
+      </a>
+
+      <a class="item" ng-click="playText('Мафия выходит на охоту и проходит мимо игроков под номерами')">
+        Мафия выходит на охоту и проходит мимо игроков под номерами
+      </a>
+      <a class="item" ng-click="playText('номер 1, номер 2, номер 3')">
+        номер 1, номер 2, номер 3
+      </a>
+
+      <a class="item" ng-click="playText('Просыпается Дон, 10 секунд Дона.')">
+        Просыпается Дон, 10 секунд Дона.
+      </a>
+      <a class="item" ng-click="playText('Дон засыпает.')">
+        Дон засыпает.
+      </a>
+
+      <a class="item" ng-click="playText('Просыпается Шериф, 10 секунд Шерифа.')">
+        Просыпается Шериф, 10 секунд Шерифа.
+      </a>
+      <a class="item" ng-click="playText('Шериф засыпает.')">
+        Шериф засыпает.
+      </a>
+
+      <a class="item" ng-click="playText('В городе утро. Игрок номер №, вас убили ночью, у вас есть минута и право назвать тройку черных игроков без жестикуляции.')">
+        В городе утро. Игрок номер №, вас убили ночью, у вас есть минута и право назвать тройку черных игроков без жестикуляции.
+      </a>
+
+      <a class="item" ng-click="playText('Принято №')">
+        Принято №
+      </a>
+
+      <a class="item" ng-click="playText('Отозвано №')">
+        Отозвано №
+      </a>
+
+      <a class="item" ng-click="playText('Итак, Голосование.')">
+        Итак, Голосование.
+      </a>
+
+      <a class="item" ng-click="playText('Выставленные кандидатуры на голосование: (перечисление по порядку выставления)')">
+        Выставленные кандидатуры на голосование: (перечисление по порядку выставления)
+      </a>
+
+      <a class="item" ng-click="playText('Повторяю порядок голосования: (повторное перечисление по порядку)')">
+        Повторяю порядок голосования: (повторное перечисление по порядку)
+      </a>
+
+      <a class="item" ng-click="playText('Голосование: за игрока №, Спасибо (стоп)')">
+        Голосование: за игрока №, Спасибо (стоп)
+      </a>
+      <a class="item" ng-click="playText('Игрок № -, вы набрали большинство голосов. Ваша последняя минута')">
+        Игрок № -, вы набрали большинство голосов. Ваша последняя минута
+      </a>
+
+      <a class="item" ng-click="playText('Автокатастрофа между игроками: № - ; № - “.“Игрок № - , ваши 30 секунд')">
+        Автокатастрофа между игроками: № - ; № - “.“Игрок № - , ваши 30 секунд
+      </a>
+
+      <a class="item" ng-click="playText('Итак, повторное голосование между игроками № - ; № -')">
+        Итак, повторное голосование между игроками № - ; № -
+      </a>
+
+      <a class="item" ng-click="playText('Кто за то, чтобы все игроки (оба игрока) покинули игру?')">
+        Кто за то, чтобы все игроки (оба игрока) покинули игру?
+      </a>
+
+
+      <a class="item" ng-click="playText('Фол')">
+        Фол
+      </a>
+      <a class="item" ng-click="playText('Фол за чрезмерную жестикуляцию')">
+        Фол за чрезмерную жестикуляцию
+      </a>
+
+      <a class="item" ng-click="playText('Игрок № -, Третий фол')">
+        Игрок № -, Третий фол
+      </a>
+
+      <a class="item" ng-click="playText('Игрок № - , Вы дисквалифицированы. Вы покидаете игру без права речи')">
+        Игрок № - , Вы дисквалифицированы. Вы покидаете игру без права речи
+      </a>
+
+    </div>
+
   </ion-content>
 </ion-view>

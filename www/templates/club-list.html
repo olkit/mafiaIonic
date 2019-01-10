@@ -1,25 +1,10 @@
-<ion-view view-title="Список клубов" hide-nav-bar="true">
+<ion-view view-title="Список клубов">
   <ion-content class="padding">
     <div class="list">
-      <a class="item item-thumbnail-left" href="#">
-        <img src="images/club/imperia.jpg">
-        <h2>ИмперияZ</h2>
-        <p>г. Астана</p>
-      </a>
-      <a class="item item-thumbnail-left" href="#">
-        <img src="images/club/gangstabar.jpg">
-        <h2>Gangstabar</h2>
-        <p>г. Астана</p>
-      </a>
-      <a class="item item-thumbnail-left" href="#">
-        <img src="images/club/hq.jpg">
-        <h2>Преступление и наказание</h2>
-        <p>г. Караганды</p>
-      </a>
-      <a class="item item-thumbnail-left item-button-right" href="#">
-        <img src="images/club/gg.jpg">
-        <h2>Город Грехов</h2>
-        <p>г. Алматы</p>
+      <a ng-repeat="club in clubList" class="item item-thumbnail-left item-button-right" ng-href="#/club-profile/{{club.clubID}}">
+        <img ng-src="{{'https://ucarecdn.com/' + club.avatar + '/'}}.jpg">
+        <h2>{{club.name}}({{club.ceo}})</h2>
+        <p>г. {{club.city}}</p>
 
         <button class="button button-assertive">
           <i class="icon ion-fireball"></i>
@@ -28,3 +13,4 @@
     </div>
   </ion-content>
 </ion-view>
+

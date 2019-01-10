@@ -1,5 +1,10 @@
-<ion-view view-title="Суд">
+<ion-view view-title="Суд" hide-nav-bar="true">
   <ion-content>
+
+
+    <button class="button button-full button-dark" ng-click="clearCourt();$state.go('tab.chats');">
+      Голосования не будет!
+    </button>
     <div class="card">
       <div class="row">
         <div class="col col-50">
@@ -30,7 +35,7 @@
       </div>
       <div class="row">
         <button class="button button-full button-energized" ng-show="kickBalance" ng-click="endBalance()">
-          Кто за чтоб игроки (<span ng-repeat="vb in voteBalance">{{vb.slot}} </span>) покинули стол?
+          Сколько игроков "ЗА" чтоб игроки (<span ng-repeat="vb in voteBalance">{{vb.slot}} </span>) покинули стол?
           [{{kickBalanceVote}}]:
         </button>
       </div>
@@ -67,10 +72,6 @@
     </button>
     <button class="button button-full button-balanced" ng-click="endCourt()" ng-hide="reVoting || kickBalance">
       Завершить. <span ng-show="kickSlot > 0">Игрок {{kickSlot}} покидает стол.</span>
-    </button>
-
-    <button class="button button-full button-dark" ng-click="clearCourt()">
-      Голосования не будет!
     </button>
 
     <div class="card">

@@ -2,10 +2,13 @@
   <ion-content class="padding">
     <ion-refresher on-refresh="updateProfile()"></ion-refresher>
     <div class="card">
-      <div class="item item-avatar">
-        <img src="img/adam.jpg">
-        <h2>{{auth.nick}}</h2>
+      <div class="item item-avatar item-icon-right">
+        <img ng-src="{{'https://ucarecdn.com/' + auth.avatar + '/'}}">
+        <h2>{{auth.nick|capitalize}}</h2>
         <p>Клуб (г.{{auth.city}})</p>
+        <!--<span class="item-note">Grammy</span>-->
+        <!--<i class="icon ion-ios-telephone-outline"></i>-->
+        <span class="badge badge-dark">{{auth.rating}}</span>
       </div>
       <div class="item item-text-wrap">
         <canvas id="profile" class="chart chart-radar"
@@ -16,9 +19,10 @@
     <div class="card">
       <div class="item item-divider">
         Статистика
+        <p>(Количество/ Побед-Проигрыш/ Процент)</p>
       </div>
       <div class="row">
-        <div class="col col-40 col-center">Сыграно игр</div>
+        <div class="col col-40 col-center">Всего игр</div>
         <div class="col col-20 col-center">{{stats.gameCount}}</div>
         <div class="col col-20 col-center">{{stats.winCount}}/{{stats.loseCount}}</div>
         <div class="col col-20 col-center">{{100 * stats.winCount / stats.gameCount | number: 0}}%</div>
@@ -52,9 +56,10 @@
     <div class="card">
       <div class="item item-divider">
         Друзья (Все игры)
+        <p>(Игрок/ Количество/ Побед-Проигрыш/ Процент)</p>
       </div>
       <div class="row" ng-repeat="friends in statsFriends.gameCount">
-        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-40 col-center">{{friends.nick|capitalize}}</div>
         <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
         <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
         <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
@@ -63,10 +68,10 @@
 
     <div class="card">
       <div class="item item-divider">
-        Друзья (Разноцвет)
+        Друзья (Противоположной команде)
       </div>
       <div class="row" ng-repeat="friends in statsFriends.oppositeCount">
-        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-40 col-center">{{friends.nick|capitalize}}</div>
         <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
         <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
         <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
@@ -75,10 +80,10 @@
 
     <div class="card">
       <div class="item item-divider">
-        Друзья (Разноцавет Я-Мирный)
+        Друзья (Я красный - он черный)
       </div>
       <div class="row" ng-repeat="friends in statsFriends.oppositeCivilCount">
-        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-40 col-center">{{friends.nick|capitalize}}</div>
         <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
         <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
         <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
@@ -87,10 +92,10 @@
 
     <div class="card">
       <div class="item item-divider">
-        Друзья (Разноцавет Я-Мафия)
+        Друзья (Я черный - он красный)
       </div>
       <div class="row" ng-repeat="friends in statsFriends.oppositeMafiaCount">
-        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-40 col-center">{{friends.nick|capitalize}}</div>
         <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
         <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
         <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
@@ -99,10 +104,10 @@
 
     <div class="card">
       <div class="item item-divider">
-        Друзья (Одноцвет)
+        Друзья (В одной команде)
       </div>
       <div class="row" ng-repeat="friends in statsFriends.sameCount">
-        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-40 col-center">{{friends.nick|capitalize}}</div>
         <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
         <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
         <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
@@ -111,10 +116,10 @@
 
     <div class="card">
       <div class="item item-divider">
-        Друзья (Одноцвет Мы-Мирные)
+        Друзья (Все красные)
       </div>
       <div class="row" ng-repeat="friends in statsFriends.sameCivilCount">
-        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-40 col-center">{{friends.nick|capitalize}}</div>
         <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
         <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
         <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
@@ -123,13 +128,99 @@
 
     <div class="card">
       <div class="item item-divider">
-        Друзья (Одноцвет Мы-Мафия)
+        Друзья (Вместе черные)
       </div>
       <div class="row" ng-repeat="friends in statsFriends.sameMafiaCount">
-        <div class="col col-40 col-center">{{friends.nick}}</div>
+        <div class="col col-40 col-center">{{friends.nick|capitalize}}</div>
         <div class="col col-20 col-center">{{friends.gameCount | number: 0}}</div>
         <div class="col col-20 col-center">{{friends.winCount | number: 0}}/{{friends.loseCount | number: 0}}</div>
         <div class="col col-20 col-center">{{100 * friends.winCount / friends.gameCount | number: 0}}%</div>
+      </div>
+    </div>
+
+    <div class="card" ng-repeat="slot in stats.slots track by $index">
+      <div class="item item-divider">
+        Статистика по слотам. Слот {{slot.slot}}
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">Всего игр</div>
+        <div class="col col-20 col-center">{{slot.gameCount}}</div>
+        <div class="col col-20 col-center">{{slot.winCount}}/{{slot.loseCount}}</div>
+        <div class="col col-20 col-center">{{100 * slot.winCount / slot.gameCount | number: 0}}%</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">За Мирного</div>
+        <div class="col col-20 col-center">{{slot.civilCount}}</div>
+        <div class="col col-20 col-center">{{slot.winCivilCount}}/{{slot.loseCivilCount}}</div>
+        <div class="col col-20 col-center">{{100 * slot.winCivilCount / slot.civilCount | number: 0}}%</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">За Шерифа</div>
+        <div class="col col-20 col-center">{{slot.sherifCount}}</div>
+        <div class="col col-20 col-center">{{slot.winSherifCount}}/{{slot.loseSherifCount}}</div>
+        <div class="col col-20 col-center">{{100 * slot.winSherifCount / slot.sherifCount | number: 0}}%</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">За Мафию</div>
+        <div class="col col-20 col-center">{{slot.mafiaCount}}</div>
+        <div class="col col-20 col-center">{{slot.winMafiaCount}}/{{slot.loseMafiaCount}}</div>
+        <div class="col col-20 col-center">{{100 * slot.winMafiaCount / slot.mafiaCount | number: 0}}%</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">За Дона</div>
+        <div class="col col-20 col-center">{{slot.donCount}}</div>
+        <div class="col col-20 col-center">{{slot.winDonCount}}/{{slot.loseDonCount}}</div>
+        <div class="col col-20 col-center">{{100 * slot.winDonCount / slot.donCount | number: 0}}%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Лучший ход.Доны стреляли в тебя
+      </div>
+      <div class="row" ng-repeat="(donName, count) in statsBestMove.don track by $index">
+        <div class="col col-40 col-center">{{donName|capitalize}}</div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center">{{count}}</div>
+      </div>
+
+      <div class="item item-divider">
+        Лучший ход. Попадание
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">Никого</div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center">{{statsBestMove.found0}}</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">В одного</div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center">{{statsBestMove.found1}}</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">В двоих</div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center">{{statsBestMove.found2}}</div>
+      </div>
+      <div class="row">
+        <div class="col col-40 col-center">Всех</div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center"></div>
+        <div class="col col-20 col-center">{{statsBestMove.found3}}</div>
+      </div>
+      <div class="item item-divider">
+        Лучший ход. Оставил в Лучший ход.
+        <p>(Имя - Нашел/Не нашел/Красный) </p>
+      </div>
+      <div class="row" ng-repeat="(username, move) in statsBestMove.bestMoveFieldMap track by $index">
+        <div class="col col-40 col-center">{{username|capitalize}}</div>
+        <div class="col col-20 col-center">{{move.found}}</div>
+        <div class="col col-20 col-center">{{move.notFound}}</div>
+        <div class="col col-20 col-center">{{move.red}}</div>
       </div>
     </div>
   </ion-content>

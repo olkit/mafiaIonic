@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-widthionic cordova platform add android">
   <title></title>
 
   <link rel="manifest" href="manifest.json">
@@ -32,7 +32,26 @@
   <!-- your app's js -->
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
+  <script src="js/controllers/AccountCtrl.js"></script>
+  <script src="js/controllers/ChatsCtrl.js"></script>
+  <script src="js/controllers/ClubListCtrl.js"></script>
+  <script src="js/controllers/ClubProfileCtrl.js"></script>
+  <script src="js/controllers/DashCtrl.js"></script>
+  <script src="js/controllers/EndCtrl.js"></script>
+  <script src="js/controllers/GamesCtrl.js"></script>
+  <script src="js/controllers/LoginCtrl.js"></script>
+  <script src="js/controllers/NightCtrl.js"></script>
+  <script src="js/controllers/TabCtrl.js"></script>
+  <script src="js/controllers/ProfileCtrl.js"></script>
+  <script src="js/controllers/LiveChat.js"></script>
+
   <script src="js/services.js"></script>
+  <script src="js/factory/Chats.js"></script>
+  <script src="js/factory/Game.js"></script>
+  <script src="js/factory/Games.js"></script>
+  <script src="js/factory/ws.js"></script>
+  <script src="js/factory/Court.js"></script>
+  <script src="js/factory/Users.js"></script>
 
   <script src="lib/chart.min.js"></script>
   <script src="lib/angular-chart.min.js"></script>
@@ -62,18 +81,18 @@
   <ion-side-menu side="left">
     <ion-header-bar>
       <div style="height: 90px; width: 100%">
-        <img src="img/adam.jpg" alt="" width="80px">
+        <img ng-src="{{'https://ucarecdn.com/' + auth.avatar + '/'}}" alt="" width="80px">
       </div>
     </ion-header-bar>
-    <ion-content has-header="false" style="top: 100px">
+    <ion-content has-header="false" style="top: 90px">
       <ion-list>
-        <ion-item href="#/profile" menu-close="">Профиль</ion-item>
-        <ion-item href="#/liveChat" menu-close="">Чат</ion-item>
-        <ion-item href="#/club-list" menu-close="">Клубы</ion-item>
-        <ion-item href="#/club-profile" menu-close="">Статистика</ion-item>
-        <ion-item href="#/games" menu-close="">Игры</ion-item>
-        <ion-item ng-show="auth.isMaster" href="#/tab/dash" menu-close="">Ведущий</ion-item>
-        <ion-item ng-click="logout()" menu-close="">Выход</ion-item>
+        <ion-item href="#/profile" menu-close=""><i class="icon ion-person"></i> Профиль</ion-item>
+        <ion-item ng-show="false" href="#/liveChat" menu-close=""><i class="icon ion-chatbox"></i> Чат</ion-item>
+        <ion-item href="#/club-list" menu-close=""><i class="icon ion-person"></i> Клубы</ion-item>
+        <ion-item href="#/games" menu-close=""><i class="icon ion-ios-game-controller-a"></i> Игры</ion-item>
+        <ion-item ng-show="auth.isMaster" href="#/tab/dash" menu-close=""><i class="icon ion-gear-a"></i> Ведущий</ion-item>
+        <ion-item href="#/about" menu-close=""><i class="icon ion-ios-star"></i> О Приложении</ion-item>
+        <ion-item ng-click="logout()" menu-close=""><i class="icon ion-android-exit"></i> Выход</ion-item>
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

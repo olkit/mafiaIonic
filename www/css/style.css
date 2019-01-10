@@ -23,3 +23,7 @@
   color: white;
   background: linear-gradient(to right, red, black);
 }
+
+.opacity-60 {
+  opacity: 0.6;
+}

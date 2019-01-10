@@ -23,14 +23,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     });
   })
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
-    $stateProvider
+    $ionicConfigProvider.views.maxCache(0);
 
+    $stateProvider
     // setup an abstract state for the tabs directive
       .state('tab', {
         url: '/tab',
@@ -109,7 +110,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       })
 
       .state('club-profile', {
-        url: '/club-profile',
+        url: '/club-profile/:clubID',
         templateUrl: 'templates/club-profile.html',
         controller: 'ClubProfileCtrl'
       })
@@ -124,6 +125,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         url: '/liveChat',
         templateUrl: 'templates/live-chat.html',
         controller: 'LiveChat'
+      })
+
+      .state('about', {
+        url: '/about',
+        templateUrl: 'templates/about.html'
       });
 
     // if none of the above states are matched, use this as the fallback
