@@ -130,6 +130,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       .state('about', {
         url: '/about',
         templateUrl: 'templates/about.html'
+      })
+
+      .state('settings', {
+        url: '/settings',
+        templateUrl: 'templates/settings.html'
       });
 
     // if none of the above states are matched, use this as the fallback

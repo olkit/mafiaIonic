@@ -58,8 +58,7 @@
 </head>
 <body ng-app="starter" ng-controller="AppCtrl">
 <!--
-  The nav bar that will be updated as we navigate between views.
-<!--&ndash;&gt;-->
+  The nav bar that will be updated as we navigate between views.-->
 <!--<ion-nav-bar class="bar-stable">-->
 <!--<ion-nav-back-button>-->
 <!--</ion-nav-back-button>-->
@@ -91,6 +90,7 @@
         <ion-item href="#/club-list" menu-close=""><i class="icon ion-person"></i> Клубы</ion-item>
         <ion-item href="#/games" menu-close=""><i class="icon ion-ios-game-controller-a"></i> Игры</ion-item>
         <ion-item ng-show="auth.isMaster" href="#/tab/dash" menu-close=""><i class="icon ion-gear-a"></i> Ведущий</ion-item>
+        <ion-item href="#/settings" menu-close=""><i class="icon ion-ios-settings"></i> Настройки</ion-item>
         <ion-item href="#/about" menu-close=""><i class="icon ion-ios-star"></i> О Приложении</ion-item>
         <ion-item ng-click="logout()" menu-close=""><i class="icon ion-android-exit"></i> Выход</ion-item>
     </ion-content>
