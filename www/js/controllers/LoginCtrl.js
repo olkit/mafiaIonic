@@ -27,6 +27,8 @@ mafiaApp.controller('LoginCtrl', function ($scope, $state, $http, $ionicSideMenu
           $scope.auth.isMaster = response.data.isMaster;
           $scope.auth.avatar = response.data.avatar;
           $scope.auth.rating = response.data.rating;
+          $scope.auth.balance = response.data.balance;
+          $scope.auth.clubID = response.data.clubID;
 
           $scope.saveAuth();
 
@@ -34,6 +36,8 @@ mafiaApp.controller('LoginCtrl', function ($scope, $state, $http, $ionicSideMenu
           $scope.hideLoading();
         },
         function (response) { // optional
+
+          $scope.debug = response;
 
           $scope.auth.isAuth = false;
           $scope.saveAuth();

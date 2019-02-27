@@ -135,6 +135,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       .state('settings', {
         url: '/settings',
         templateUrl: 'templates/settings.html'
+      })
+
+      .state('liveGames', {
+        url: '/live-games',
+        templateUrl: 'templates/live-games.html',
+        controller: 'LiveGames'
       });
 
     // if none of the above states are matched, use this as the fallback

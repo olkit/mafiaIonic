@@ -32,18 +32,19 @@
   <!-- your app's js -->
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
-  <script src="js/controllers/AccountCtrl.js"></script>
+  <script src="js/controllers/accountCtrl.js"></script>
   <script src="js/controllers/ChatsCtrl.js"></script>
   <script src="js/controllers/ClubListCtrl.js"></script>
   <script src="js/controllers/ClubProfileCtrl.js"></script>
   <script src="js/controllers/DashCtrl.js"></script>
-  <script src="js/controllers/EndCtrl.js"></script>
+  <script src="js/controllers/endCtrl.js"></script>
   <script src="js/controllers/GamesCtrl.js"></script>
   <script src="js/controllers/LoginCtrl.js"></script>
-  <script src="js/controllers/NightCtrl.js"></script>
+  <script src="js/controllers/nightCtrl.js"></script>
   <script src="js/controllers/TabCtrl.js"></script>
   <script src="js/controllers/ProfileCtrl.js"></script>
   <script src="js/controllers/LiveChat.js"></script>
+  <script src="js/controllers/LiveGames.js"></script>
 
   <script src="js/services.js"></script>
   <script src="js/factory/Chats.js"></script>
@@ -87,10 +88,11 @@
       <ion-list>
         <ion-item href="#/profile" menu-close=""><i class="icon ion-person"></i> Профиль</ion-item>
         <ion-item ng-show="false" href="#/liveChat" menu-close=""><i class="icon ion-chatbox"></i> Чат</ion-item>
-        <ion-item href="#/club-list" menu-close=""><i class="icon ion-person"></i> Клубы</ion-item>
-        <ion-item href="#/games" menu-close=""><i class="icon ion-ios-game-controller-a"></i> Игры</ion-item>
+        <ion-item href="#/club-list" menu-close=""><i class="icon ion-ios-people"></i> Клубы</ion-item>
+        <ion-item href="#/live-games" menu-close=""><i class="icon ion-flame"></i> LIVE</ion-item>
+        <ion-item href="#/games" menu-close=""><i class="icon ion-ios-list"></i> Мои Игры</ion-item>
         <ion-item ng-show="auth.isMaster" href="#/tab/dash" menu-close=""><i class="icon ion-gear-a"></i> Ведущий</ion-item>
-        <ion-item href="#/settings" menu-close=""><i class="icon ion-ios-settings"></i> Настройки</ion-item>
+        <ion-item ng-show="auth.isMaster" href="#/settings" menu-close=""><i class="icon ion-ios-settings"></i> Настройки</ion-item>
         <ion-item href="#/about" menu-close=""><i class="icon ion-ios-star"></i> О Приложении</ion-item>
         <ion-item ng-click="logout()" menu-close=""><i class="icon ion-android-exit"></i> Выход</ion-item>
     </ion-content>

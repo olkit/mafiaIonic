@@ -4,6 +4,7 @@ mafiaApp.controller('DashCtrl', function ($scope, $state, Chats, Game, Users) {
   $scope.gamers = [];
 
   Users.load();
+  $scope.isRating = false;
   $scope.isDonAvailable = true;
   $scope.isMafiaAvailable = true;
   $scope.isSherifAvailable = true;
@@ -24,7 +25,7 @@ mafiaApp.controller('DashCtrl', function ($scope, $state, Chats, Game, Users) {
         name: "",
         role: "CIVIL",
         lastText: '#' + (i + 1),
-        status: '',
+        status: 'live',
         penalty: 0,
         mute: false
       };
@@ -45,6 +46,9 @@ mafiaApp.controller('DashCtrl', function ($scope, $state, Chats, Game, Users) {
 
     Chats.set(gamers);
     Game.setGamers(gamers);
+    Game.setRating($scope.isRating);
+    Game.setMaster($scope.auth.userID);
+    Game.setClubID($scope.auth.clubID);
     Game.setStart();
     Game.sendToServer($scope.auth.nick);
     $state.go('tab.chats');
@@ -106,4 +110,20 @@ mafiaApp.controller('DashCtrl', function ($scope, $state, Chats, Game, Users) {
     $scope.gamers[$scope.activeUserElement].id = user.id;
     $scope.gamers[$scope.activeUserElement].name = user.name;
   };
+
+  $scope.setTestGamers = function() {
+
+    $scope.gamers = [
+      {slot: 1, name: '1', role: 'CIVIL', status: 'live', penalty: 0, mute: false},
+      {slot: 2, name: '2', role: 'MAFIA', status: 'live', penalty: 0, mute: false},
+      {slot: 3, name: '3', role: 'CIVIL', status: 'live', penalty: 0, mute: false},
+      {slot: 4, name: '4', role: 'DON', status: 'live', penalty: 0, mute: false},
+      {slot: 5, name: '5', role: 'CIVIL', status: 'live', penalty: 0, mute: false},
+      {slot: 6, name: '6', role: 'CIVIL', status: 'live', penalty: 0, mute: false},
+      {slot: 7, name: '7', role: 'SHERIF', status: 'live', penalty: 0, mute: false},
+      {slot: 8, name: '8', role: 'CIVIL', status: 'live', penalty: 0, mute: false},
+      {slot: 9, name: '9', role: 'MAFIA', status: 'live', penalty: 0, mute: false},
+      {slot: 10, name: '0', role: 'CIVIL', status: 'live', penalty: 0, mute: false}
+    ];
+  }
 });

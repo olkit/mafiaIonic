@@ -9,6 +9,7 @@
           <span ng-show="chat.penalty < 3">{{chat.penalty}}</span>
           <span ng-show="chat.penalty == 4">3</span>
           <span ng-show="chat.penalty == 3">3🔇</span>
+          <span ng-show="chat.penalty > 4">У</span>
         </button>
         <i class="icon ion-thumbsup dark" ng-click="voted(chat)" on-hold="kick(chat)" ng-hide="chat.status == 'participant'"></i>
       </ion-item>

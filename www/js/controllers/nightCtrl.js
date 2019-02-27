@@ -72,9 +72,10 @@ mafiaApp.controller('NightCtrl', function ($scope, $interval, $state, Chats, Gam
     $scope.gamephase = Game.getGamePhase();
   });
   $scope.lastKilledGamer = null;
+
   $scope.kill = function (number) {
-    $scope.lastKilledGamer = Chats.get(number);
-    if ($scope.gamers.length >= 9 && $scope.lastKilledGamer != null) {
+    if ($scope.gamers.length >= 9 && $scope.lastKilledGamer == null) {
+      $scope.lastKilledGamer = Chats.get(number);
       $scope.firstKilled = Chats.get(number);
       Game.setFirstKilled($scope.firstKilled.slot);
     }
@@ -93,7 +94,7 @@ mafiaApp.controller('NightCtrl', function ($scope, $interval, $state, Chats, Gam
   $scope.missKill = function() {
     Game.gameDetailNewPhase();
     Game.addGameLog('[Ночь] В городе не сострел');
-    $state.go('tab.dash');
+    $state.go('tab.chats');
   };
 
   $scope.firstKilled = null;

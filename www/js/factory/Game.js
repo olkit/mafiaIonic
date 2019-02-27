@@ -154,13 +154,20 @@ mafiaAppFactory.factory('Game', function ($http) {
     setRating: function (isRating) {
       game.isRating = isRating;
     },
+    setMaster: function (masterID) {
+      game.masterID = masterID;
+    },
+    setClubID: function (clubID) {
+      game.clubID = clubID;
+    },
     setStop: function (reason) {
       game.isStopped = true;
       game.stoppedReason = reason;
     },
     setStart: function () {
       game.createdTimestamp = new Date().getTime() / 1000;
-      this.addGameLog('Игра началась ' + new Date(game.createdTimestamp * 1000));
+      var nowDate = new Date(game.createdTimestamp * 1000);
+      this.addGameLog('Игра началась ' + nowDate.getHours() + ':' + nowDate.getMinutes());
     },
     setFinish: function () {
       game.duration = new Date().getTime() / 1000 - game.createdTimestamp;
@@ -212,15 +219,15 @@ mafiaAppFactory.factory('Game', function ($http) {
       //PENALTY POINTS FOR 4 penalty
     },
     setGamerPoint: function (slot, point) {
-      if (slot <= 0 || slot >= game.gamers.length) return;
+      //if (slot <= 0 || slot >= game.gamers.length) return;
       game.gamers[slot - 1].point = point;
     },
     setGamerPenalty: function (slot, penalty) {
-      if (slot <= 0 || slot > game.gamers.length) return;
+      //if (slot <= 0 || slot > game.gamers.length) return;
       game.gamers[slot - 1].penalty = penalty;
     },
     setGamerStatus: function (slot, status) {
-      if (slot <= 0 || slot > game.gamers.length) return;
+      //if (slot <= 0 || slot > game.gamers.length) return;
       game.gamers[slot - 1].status = status;
     },
     addGameLog: function (text) {
@@ -248,11 +255,31 @@ mafiaAppFactory.factory('Game', function ($http) {
         if(gamephase[i] === 'ON_VOTE' ||gamephase[i] === 'ON_REVOTE' || gamephase[i] === 'LIVE') gamephase[i] = 'LIVE';
         else gamephase[i] = 'DEAD';
       }
+      this.sendToServer(game.masterID);
     },
     sendToServer: function(userID) {
       $http({
-        url:'http://127.0.0.1:8080/api/onlineGames/' + userID,
+        url:'http://mafia.zapto.org:8080/api/onlineGames/' + userID,
+        //url:'http://127.0.0.1:8080/api/onlineGames/' + userID,
         method: "POST",
+        timeout: 10000,
+        header: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json"
+        },
+        data: game
+      })
+        .then(function (response) {
+            console.log(response);
+          },
+          function (response) {
+          });
+    },
+    sendToServerOnlineFinish: function(userID, game) {
+      $http({
+        url:'http://mafia.zapto.org:8080/api/onlineGames/' + userID + '/' + game.roleWin,
+        //url:'http://127.0.0.1:8080/api/onlineGames/' + userID + '/' + game.roleWin,
+        method: "DELETE",
         timeout: 10000,
         header: {
           "Access-Control-Allow-Origin": "*",

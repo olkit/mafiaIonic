@@ -55,7 +55,7 @@ mafiaApp.controller('ChatsCtrl', function ($scope, $interval, $state, $ionicSide
     Game.addGameLog('4 фол - игрок #' + gamer.slot);
     Game.setGamerStatus(gamer.slot, 'QUITED');
     Game.gameDetailSetStatus(gamer.slot, 'QUITED');
-    $scope.kill();
+    $scope.kill(gamer);
   };
   $scope.kick = function(gamer) {
     Game.addGameLog('Дисквал игрок #' + gamer.slot);
@@ -83,7 +83,7 @@ mafiaApp.controller('ChatsCtrl', function ($scope, $interval, $state, $ionicSide
 
   $scope.upPenalty = function (gamer) {
     gamer.penalty++;
-    Game.addGameLog('Игрок #' + gamer.slot + ' получил ' + gamer.penalty + ' фол.');
+    if(gamer.penalty < 4) Game.addGameLog('Игрок #' + gamer.slot + ' получил ' + gamer.penalty + ' фол.');
     Game.setGamerPenalty(gamer.slot, gamer.penalty);
     if (gamer.penalty >= 5) $scope.quit(gamer);
   };

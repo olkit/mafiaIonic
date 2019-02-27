@@ -10,7 +10,7 @@
 
       </div>
       <div class="col col-center"><label class="toggle">
-        <input type="checkbox">
+        <input type="checkbox" ng-model="isRating">
         <div class="track">
           <div class="handle"></div>
         </div>
@@ -52,7 +52,7 @@
     <button class="button button-full button-balanced" ng-click="newGame(gamers)" href="#/tab/chats">
       Начать
     </button>
-    <button class="button button-full button-balanced" ng-click="resetInit()">
+    <button class="button button-full button-balanced" ng-click="resetInit()" on-hold="setTestGamers()">
       Очистить
     </button>
     <button class="button button-full button-calm" ng-click="shuffleGamers(gamers)">
@@ -75,7 +75,7 @@
             {{gamers[activeUserElement].name}}
         </div>
       </div>
-      <p ng-repeat="user in userList" ng-click="setUserToActiveSlot(user)" class="badge badge-stable">{{user.name}}</p>
+      <p ng-repeat="user in userList" ng-click="setUserToActiveSlot(user)" class="badge badge-stable button-large">{{user.name}}</p>
     </div>
   </ion-content>
 </ion-view>

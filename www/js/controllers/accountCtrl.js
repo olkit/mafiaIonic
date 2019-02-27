@@ -46,6 +46,7 @@ mafiaApp.controller('AccountCtrl', function ($scope, $interval, $state, Chats, C
   };
 
   $scope.kill = function (gamer) {
+    Game.addGameLog('TEST Удален игрок #' + gamer.slot);
     if (Chats.remove(gamer)) {
       Game.addGameLog('Удален игрок #' + gamer.slot);
       Game.setGamerStatus(gamer.slot, 'KILLED');
@@ -182,6 +183,7 @@ mafiaApp.controller('AccountCtrl', function ($scope, $interval, $state, Chats, C
     }
 
     $scope.clearCourt();
+    $state.go('tab.chats');
   };
   $scope.clearCourt = function () {
     var votes = [];

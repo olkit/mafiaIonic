@@ -1,0 +1,34 @@
+<ion-view view-title="Список онлайн игр - Баланс {{balance}}">
+  <ion-content class="padding">
+    <div class="card" ng-repeat="game in liveGames">
+      <div class="item item-divider">
+        {{game.clubID}} - {{game.masterID}} <span ng-class="bets[game.gameID] > 0 ? 'badge badge-assertive':
+                                              bets[game.gameID] < 0 ? 'badge badge-dark': 'badge badge-stable'">Ставка {{bets[game.gameID]| absolute}}</span>
+      </div>
+      <div class="item item-divider">
+        {{game.gameLog[game.gameLog.length - 1]}}
+      </div>
+      <div class="item item-text-wrap">
+        <div class="list">
+          <div class="item item-avatar-left item-light" ng-repeat="player in game.gamers" href="#">
+            <img ng-src="/images/status/{{player.status}}.svg" alt="" style=" width: auto; height: auto;">
+
+              ({{$index+1}}) {{player.name}}
+            <span ng-class="getClassCard(player.role)">{{getRoleName(player.role)}}</span>
+          </div>
+
+        </div>
+      </div>
+      <div class="item item-divider">
+        <div class="button-bar">
+          <a ng-click="incrementBet(game.gameID, 50)" class="button button-assertive button-small">Красных +50</a>
+          <a ng-click="clearBet(game.gameID)" class="button button-stable">Очистить</a>
+          <a ng-click="incrementBet(game.gameID, -50)" class="button button-dark button-small">Черные +50</a>
+        </div>
+        <button ng-click="sendGameBet(game.gameID, auth.userID, bets[game.gameID])" ng-hide="bets[game.gameID] == 0" class="button button-full button-balanced">
+          Поставить ставку
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

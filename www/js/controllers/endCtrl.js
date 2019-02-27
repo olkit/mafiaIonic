@@ -11,6 +11,8 @@ mafiaApp.controller('EndCtrl', function ($scope, $http, $state, Game, Games) {
   };
 
   $scope.sendServer = function () {
+    Game.sendToServerOnlineFinish($scope.game.masterID, $scope.game.roleWin);
+
     $scope.game.masterID = $scope.auth.userID;
     $scope.showLoading();
     $http({
