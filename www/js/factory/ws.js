@@ -1,5 +1,5 @@
 mafiaAppFactory.service('ws', function () {
-  var link = "ws://127.0.0.1:8080/ws";
+  var link = "ws://mafia.zapto.org/mafia/ws";
   var socket = new WebSocket(link);
   init(socket);
 

@@ -6,7 +6,8 @@ var mafiaApp = angular.module('starter.controllers', ['ionic'])
     $scope.serverUrl = "http://192.168.43.8:8080";
     $scope.serverUrl = "http://137.117.176.32/mafia";
     $scope.serverUrl = "http://127.0.0.1:8080";
-    $scope.serverUrl = "http://mafia.zapto.org:8080";
+    $scope.serverUrl = "http://mafia.zapto.org.ьфашф";
+    $scope.serverUrl = "http://185.120.58.251/mafia";
 
     $scope.auth = {};
 

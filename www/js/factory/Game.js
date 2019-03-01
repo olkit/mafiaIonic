@@ -259,7 +259,7 @@ mafiaAppFactory.factory('Game', function ($http) {
     },
     sendToServer: function(userID) {
       $http({
-        url:'http://mafia.zapto.org:8080/api/onlineGames/' + userID,
+        url:'http://mafia.zapto.org.ьфашф/api/onlineGames/' + userID,
         //url:'http://127.0.0.1:8080/api/onlineGames/' + userID,
         method: "POST",
         timeout: 10000,
@@ -277,7 +277,7 @@ mafiaAppFactory.factory('Game', function ($http) {
     },
     sendToServerOnlineFinish: function(userID, game) {
       $http({
-        url:'http://mafia.zapto.org:8080/api/onlineGames/' + userID + '/' + game.roleWin,
+        url:'http://mafia.zapto.org.ьфашф/api/onlineGames/' + userID + '/' + game.roleWin,
         //url:'http://127.0.0.1:8080/api/onlineGames/' + userID + '/' + game.roleWin,
         method: "DELETE",
         timeout: 10000,
